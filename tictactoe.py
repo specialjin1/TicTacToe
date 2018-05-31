@@ -54,14 +54,15 @@ def getBoardCopy(board):
 	return dupeBoard
 
 def isSpaceFree(board, move):
-	return board[move] == ' '
+	return board[move] == str(move)
 
 def getPlayerMove(board):
-	move = ' '
+	print('What is your next move (1-9)')
+	move = str(input())
 	while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-		print('What is your next move (1-9)')
+		print('Rechoice your move')
 		move = str(input())
-		print('Your choice is {0}'.format(move))
+	print('Your choice is {0}'.format(move))
 	return int(move)
 
 def chooseRandomMoveFromList(board, movesList):
@@ -101,13 +102,14 @@ def isBoardFull(board):
 
 print('Welcome to Tic Tac Toe!')
 while True:
-	theBoard = [' '] * 10
+	theBoard = [str(x) for x in range(11)]
 	playerLetter, computerLetter = inputPlayerLetter()
 	turn = whoGoesFirst()
 	print('The ' + turn + ' will go first')
 	gameIsPlaying = True
 
 	while gameIsPlaying:
+		print(gameIsPlaying)
 		if turn == 'player':
 			drawBoard(theBoard)
 			move = getPlayerMove(theBoard)
@@ -115,7 +117,7 @@ while True:
 			if isWinner(theBoard, playerLetter):
 				drawBoard(theBoard)
 				print('hooray! You have won the game!')
-				gameIsplaying = False
+				gameIsPlaying = False
 			else:
 				if isBoardFull(theBoard):
 					drawBoard(theBoard)
